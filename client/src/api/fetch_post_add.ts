@@ -6,7 +6,7 @@ import { getAllUsers } from "../../../server/src/services/users_service"
 export async function fetchPostAdd(postAdd:Post) {
 
 	postAdd.author.id
-	const findUser = JSON.stringify(getAllUsers().filter((u) => u.id === postAdd.author.id))
+	//const findUser = JSON.stringify(getAllUsers().filter((u) => u.id === postAdd.author.id))
 	const post3 = getAllUsers().find((p) => p.id === postAdd.author.id);
 
 	postAdd.author.name = post3?.name;
