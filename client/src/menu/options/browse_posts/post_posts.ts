@@ -1,8 +1,9 @@
-import { fetchUser } from "../../../api/fetch_user";
+import { fetchPostAdd } from "../../../api/fetch_post_add";
 import { clear, print, prompt, printNewLine } from "../../../ui/console";
 import {User} from "../../../../../server/src/types/posts.types";
+import {Post} from "../../../../../server/src/types/posts.types";
 
-export async function postUsers() {
+export async function postPosts() {
 	clear();
 
 	const user: User = {
@@ -11,10 +12,19 @@ export async function postUsers() {
 		creationDate: new Date()
 	}
 
-	user.id = await prompt("Enter User ID");
-	user.name = await prompt("Enter name");
+	const post: Post = {
+		id: '',
+		title: '',
+		text: '',
+		author: user
+	}
 
-	const result = await fetchUser( user);
+	post.id = await prompt("Enter Post ID");
+	post.title = await prompt("Enter Title");
+	post.text = await prompt("Enter Text");
+	user.id = await prompt("Enter User ID");
+
+	const result = await fetchPostAdd( post);
 
 	print(`🥳 Received post:`);
 

@@ -1,10 +1,7 @@
 import { baseUrl } from "./base_url";
 import {User} from "../../../server/src/types/posts.types";
 
-
 export async function fetchUser(user:User) {
-
-	console.log("Chegou aqui com o valor:", user)
 	try {
 		const result = await fetch(baseUrl + "/api/users/add",{
 			headers: {

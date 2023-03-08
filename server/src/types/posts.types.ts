@@ -9,8 +9,8 @@ import { sequelize } from "../../../client/src/database/database";
 
 export type User = {
 	id: string;
-	name: string;
-	creationDate: Date;
+	name?: string;
+	creationDate?: Date;
 };
 
 export type Post = {

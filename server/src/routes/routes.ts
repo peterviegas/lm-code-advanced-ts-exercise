@@ -3,6 +3,7 @@ import { Express } from "express";
 import { getAllPosts } from "../services/posts_service";
 import { getAllUsers } from "../services/users_service";
 import { saveUser } from "../services/users_service";
+import { savePost } from "../services/posts_service";
 
 /*
 
@@ -78,27 +79,36 @@ function addAPIRoutes(app: Express) {
 		else res.status(200).send(JSON.stringify({ postFound: false }));
 	});
 
+	//Post Add
+	console.log("✍️  Adding user routes to add...");
+	apiRouter.post("/post/add", (req, res) => {
+		const postToBeSave = req.body;
+		console.log("body", postToBeSave)
+		try{
+			const post = savePost(postToBeSave);
+			res.status(201).json(post);
+		} catch (error){
+			res.status(400).json({ message: (error as Error).message });
+		}
+	});
+
 	console.log("✍️  Adding user routes...");
 	apiRouter.get("/users/all", (req, res) => {
-		console.log("Chegando no ponto esperado22222")
 		res.status(200).send(JSON.stringify(getAllUsers( )));
 	});
 
 	// ❗ [1] See README
 	console.log("✍️  Adding user routes to add...");
 	apiRouter.post("/users/add", (req, res) => {
-		console.log("Chegando no ponto esperado*******")
 		const userToBeSave = req.body;
 		console.log("body", userToBeSave)
 		try{
-			console.log("Entrou aqui $$$$$$$$$$$$$$$$$$")
 			const user = saveUser(userToBeSave);
 			res.status(201).json(user);
 		} catch (error){
 			res.status(400).json({ message: (error as Error).message });
 		}
 	});
-
 
 	apiRouter.get("/users/:id", (req, res) => {
 		res
